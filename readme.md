@@ -2,6 +2,8 @@
 
 Our grid systems base on [Flexbox Grid layout](http://flexboxgrid.com) and **CSS modules** to allow the elements within the parent to be aligned.
 
+`npm i react-flexbox-creati`
+
 ## Breakpoints
 ```
 XS: 0px; 
