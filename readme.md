@@ -1,6 +1,8 @@
-# Creati's grid layout component for React
+# Creati's grid layout system for React
 
-Our grid systems base on [Flexbox Grid layout](http://flexboxgrid.com) to allow the elements within the parent to be aligned.
+Our grid system base on [Flexbox Grid layout](http://flexboxgrid.com) and **CSS modules** to allow the elements within the parent to be aligned.
+
+`npm i react-flexboxgrid-creati`
 
 ## Breakpoints
 ```
@@ -13,8 +15,8 @@ XL: 1200px; // Extra large devices (large desktops)
 ### Sizes
 `[sizes]: xs, sm, md, lg, xl`
 
-## Subcomponents
-`import { Container, Row, Col } from 'react-flexbox-creati';`
+## Components
+`import { Container, Row, Col } from 'react-flexboxgrid-creati';`
 
 Since flexbox is a whole module and not a single property, it involves a lot of things including its whole set of properties. Some of them are meant to be set on the container (parent element, known as “flex container”) whereas the others are meant to be set on the children (said “flex items”, for eg. Row, Col).
 
@@ -86,7 +88,7 @@ The number of cells to offset Col from the left.
 Add classes to reorder columns. First: -1, last: 99
 
 `hide`  
-Hide the column BELOW the given size.
+Hide the column BELOW the given breakpoint.
 
 `dynamic`  
 If you would like to disable the grid sizing rules, and determine the column width in SCSS or CSS, you have to use this attribute.
