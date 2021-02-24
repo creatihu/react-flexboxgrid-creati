@@ -1,0 +1,22 @@
+{
+  "name": "react-flexbox-creati2",
+  "version": "1.0.1",
+  "description": "Grid system based on CSS modules and flexbox for React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com"
+  },
+  "keywords": [
+    "flexbox",
+    "react",
+    "grid",
+    "css",
+    "modules"
+  ],
+  "author": "Attila Tokolics <hello@creati.hu> (https://creati.hu)",
+  "license": "ISC"
+}

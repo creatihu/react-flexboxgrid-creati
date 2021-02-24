@@ -1,0 +1,630 @@
+@import '../../assets/scss/variables';
+
+/*
+----- Flexbox Variables
+*/
+
+$xs: 'xs';
+$sm: 'sm';
+$md: 'md';
+$lg: 'lg';
+$xl: 'xl';
+
+/*
+----- Breakpoints
+*/
+
+$xs-breakpoint: 0px;
+$sm-breakpoint: 576px; // Small devices (landscape phones)
+$md-breakpoint: 768px; // Medium devices (tablets)
+$lg-breakpoint: 992px; // Large devices (desktops)
+$xl-breakpoint: 1200px; // Extra large devices (large desktops)
+
+$mobileHideBreakpoints: (
+	'sm': $sm-breakpoint,
+	'md': $md-breakpoint,
+	'lg': $lg-breakpoint,
+	'xl': $xl-breakpoint,
+	'all': '9999px'
+);
+
+/*
+----- Flexbox Mixins
+*/
+
+@mixin container-margin {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+@mixin col-defaults {
+	box-sizing: border-box;
+	flex: 0 0 auto;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+@mixin alignment-start {
+	justify-content: flex-start;
+	// text-align: start;
+}
+
+@mixin alignment-center {
+	justify-content: center;
+	// text-align: center;
+}
+
+@mixin alignment-end {
+	justify-content: flex-end;
+	// text-align: end;
+}
+
+@mixin alignment-top {
+	align-items: flex-start;
+}
+
+@mixin alignment-middle {
+	align-items: center;
+}
+
+@mixin alignment-bottom {
+	align-items: flex-end;
+}
+
+@mixin alignment-around {
+	justify-content: space-around;
+}
+
+@mixin alignment-between {
+	justify-content: space-between;
+}
+
+// ------------------------------------------------------------
+
+/*
+----- Grid
+*/
+
+.container-fluid,
+.container {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.row {
+	box-sizing: border-box;
+	display: flex;
+	flex-flow: row wrap;
+	flex: 0 1 auto;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+
+
+@for $i from 1 through 300 {
+
+	.gutters-horizontal-#{$i} {
+		margin-left: (($i / 2) * -1)#{'px'};
+		margin-right: (($i / 2) * -1)#{'px'};
+		.col,
+		[class*='col-'] {
+			padding-left: ($i / 2)#{'px'};
+			padding-right: ($i / 2)#{'px'};
+		}
+	}
+	
+	.gutters-vertical-#{$i} {
+		margin-top: (($i / 2) * -1)#{'px'};
+		margin-bottom: (($i / 2) * -1)#{'px'};
+		.col,
+		[class*='col-'] {
+			padding-top: ($i / 2)#{'px'};
+			padding-bottom: ($i / 2)#{'px'};
+		}
+	}
+}
+
+/*
+----- Sizing
+*/
+
+// Hide columns
+
+@each $breakpoint, $breakMax in $mobileHideBreakpoints {
+	@media (max-width: $breakMax) {
+		.col-hidden-#{$breakpoint} {
+			display: none !important;
+		}
+	}
+}
+
+// Default (XS)
+
+@for $i from 1 through 12 {
+	.col-#{$i} {
+		@include col-defaults;
+	}
+}
+
+@for $i from 1 through 12 {
+	.col-#{$i} {
+		flex-basis: percentage($i/12);
+		max-width: percentage($i/12);
+	}
+}
+
+@for $i from 1 through 12 {
+	.col-offset-#{$i} {
+		@include col-defaults;
+	}
+}
+
+@for $i from 1 through 12 {
+	.col-offset-#{$i} {
+		margin-left: percentage($i/12);
+	}
+}
+
+.col {
+	flex-grow: 1;
+	flex-basis: 0;
+	max-width: 100%;
+}
+
+.start {
+	@include alignment-start;
+}
+
+.center {
+	@include alignment-center;
+}
+
+.end {
+	@include alignment-end;
+}
+
+.top {
+	@include alignment-top;
+}
+
+.middle {
+	@include alignment-middle;
+}
+
+.bottom {
+	@include alignment-bottom;
+}
+
+.around {
+	@include alignment-around;
+}
+
+.between {
+	@include alignment-between;
+}
+
+// Default (XS) - exact
+
+@media (min-width: $xs-breakpoint) {
+	$size: $xs;
+
+	@for $i from -1 through 99 {
+		.order-#{$size}-#{$i} {
+			order: $i;
+		}
+	}
+
+	.container {
+		width: $xs-breakpoint;
+	}
+
+	.col-#{$size}-dynamic {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-#{$i} {
+			@include col-defaults;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-#{$i} {
+			flex-basis: percentage($i/12);
+			max-width: percentage($i/12);
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-offset-#{$i} {
+			@include col-defaults;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-offset-#{$i} {
+			margin-left: percentage($i/12);
+		}
+	}
+
+	.col-#{$size} {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	.start-#{$size} {
+		@include alignment-start;
+	}
+
+	.center-#{$size} {
+		@include alignment-center;
+	}
+
+	.end-#{$size} {
+		@include alignment-end;
+	}
+
+	.top-#{$size} {
+		@include alignment-top;
+	}
+
+	.middle-#{$size} {
+		@include alignment-middle;
+	}
+
+	.bottom-#{$size} {
+		@include alignment-bottom;
+	}
+
+	.around-#{$size} {
+		@include alignment-around;
+	}
+
+	.between-#{$size} {
+		@include alignment-between;
+	}
+}
+
+// Small devices (landscape phones)
+
+@media (min-width: $sm-breakpoint) {
+	$size: $sm;
+
+	@for $i from -1 through 99 {
+		.order-#{$size}-#{$i} {
+			order: $i;
+		}
+	}
+
+	.container {
+		width: $sm-breakpoint;
+	}
+
+	.col-#{$size}-dynamic {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-#{$i} {
+			@include col-defaults;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-#{$i} {
+			flex-basis: percentage($i/12);
+			max-width: percentage($i/12);
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-offset-#{$i} {
+			@include col-defaults;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-offset-#{$i} {
+			margin-left: percentage($i/12);
+		}
+	}
+
+	.col-#{$size} {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	.start-#{$size} {
+		@include alignment-start;
+	}
+
+	.center-#{$size} {
+		@include alignment-center;
+	}
+
+	.end-#{$size} {
+		@include alignment-end;
+	}
+
+	.top-#{$size} {
+		@include alignment-top;
+	}
+
+	.middle-#{$size} {
+		@include alignment-middle;
+	}
+
+	.bottom-#{$size} {
+		@include alignment-bottom;
+	}
+
+	.around-#{$size} {
+		@include alignment-around;
+	}
+
+	.between-#{$size} {
+		@include alignment-between;
+	}
+}
+
+// Medium devices (tablets)
+
+@media (min-width: $md-breakpoint) {
+	$size: $md;
+
+	@for $i from -1 through 99 {
+		.order-#{$size}-#{$i} {
+			order: $i;
+		}
+	}
+
+	.container {
+		width: $md-breakpoint;
+	}
+
+	.col-#{$size}-dynamic {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-#{$i} {
+			@include col-defaults;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-#{$i} {
+			flex-basis: percentage($i/12);
+			max-width: percentage($i/12);
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-offset-#{$i} {
+			@include col-defaults;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-offset-#{$i} {
+			margin-left: percentage($i/12);
+		}
+	}
+
+	.col-#{$size} {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	.start-#{$size} {
+		@include alignment-start;
+	}
+
+	.center-#{$size} {
+		@include alignment-center;
+	}
+
+	.end-#{$size} {
+		@include alignment-end;
+	}
+
+	.top-#{$size} {
+		@include alignment-top;
+	}
+
+	.middle-#{$size} {
+		@include alignment-middle;
+	}
+
+	.bottom-#{$size} {
+		@include alignment-bottom;
+	}
+
+	.around-#{$size} {
+		@include alignment-around;
+	}
+
+	.between-#{$size} {
+		@include alignment-between;
+	}
+}
+
+//Large devices (desktops)
+
+@media (min-width: $lg-breakpoint) {
+	$size: $lg;
+
+	@for $i from -1 through 99 {
+		.order-#{$size}-#{$i} {
+			order: $i;
+		}
+	}
+
+	.container {
+		width: $lg-breakpoint;
+	}
+
+	.col-#{$size}-dynamic {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-#{$i} {
+			@include col-defaults;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-#{$i} {
+			flex-basis: percentage($i/12);
+			max-width: percentage($i/12);
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-offset-#{$i} {
+			@include col-defaults;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-offset-#{$i} {
+			margin-left: percentage($i/12);
+		}
+	}
+
+	.col-#{$size} {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	.start-#{$size} {
+		@include alignment-start;
+	}
+
+	.center-#{$size} {
+		@include alignment-center;
+	}
+
+	.end-#{$size} {
+		@include alignment-end;
+	}
+
+	.top-#{$size} {
+		@include alignment-top;
+	}
+
+	.middle-#{$size} {
+		@include alignment-middle;
+	}
+
+	.bottom-#{$size} {
+		@include alignment-bottom;
+	}
+
+	.around-#{$size} {
+		@include alignment-around;
+	}
+
+	.between-#{$size} {
+		@include alignment-between;
+	}
+}
+
+// Extra large devices (large desktops)
+
+@media (min-width: $xl-breakpoint) {
+	$size: $xl;
+
+	@for $i from -1 through 99 {
+		.order-#{$size}-#{$i} {
+			order: $i;
+		}
+	}
+
+	.container {
+		width: $xl-breakpoint;
+	}
+
+	.col-#{$size}-dynamic {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-#{$i} {
+			@include col-defaults;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-#{$i} {
+			flex-basis: percentage($i/12);
+			max-width: percentage($i/12);
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-offset-#{$i} {
+			@include col-defaults;
+		}
+	}
+
+	@for $i from 1 through 12 {
+		.col-#{$size}-offset-#{$i} {
+			margin-left: percentage($i/12);
+		}
+	}
+
+	.col-#{$size} {
+		flex-grow: 1;
+		flex-basis: 0;
+		max-width: 100%;
+	}
+
+	.start-#{$size} {
+		@include alignment-start;
+	}
+
+	.center-#{$size} {
+		@include alignment-center;
+	}
+
+	.end-#{$size} {
+		@include alignment-end;
+	}
+
+	.top-#{$size} {
+		@include alignment-top;
+	}
+
+	.middle-#{$size} {
+		@include alignment-middle;
+	}
+
+	.bottom-#{$size} {
+		@include alignment-bottom;
+	}
+
+	.around-#{$size} {
+		@include alignment-around;
+	}
+
+	.between-#{$size} {
+		@include alignment-between;
+	}
+}
