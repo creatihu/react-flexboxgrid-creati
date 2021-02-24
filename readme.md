@@ -1,4 +1,4 @@
-# GridLayout Component
+# Creati's grid layout component for React
 
 Our grid systems base on [Flexbox Grid layout](http://flexboxgrid.com) to allow the elements within the parent to be aligned.
 
